@@ -11,6 +11,7 @@ import java.util.List;
 public class HomePage {
 
     // TODO implement implicit waits
+    // Test comment
 
     private WebDriver driver;
     private WebDriverWait wait;
