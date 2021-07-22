@@ -46,8 +46,8 @@ public class HomePage {
     private By packagesDestination = By.id("location-field-destination-menu");
 
     // Suggested result selectors - Flights
-    private By flightsOriginSuggestedResult = By.cssSelector("button.uitk-button[data-stid='location-field-leg1-origin-result-item-button']");
-    private By flightsDestinationSuggestedResult = By.cssSelector("[data-stid='location-field-leg1-destination-result-item-button']");
+    private By flightsOriginSuggestedResult = By.cssSelector("[data-stid='location-field-leg1-origin-result-item-button']:first-child");
+    private By flightsDestinationSuggestedResult = By.cssSelector("[data-stid='location-field-leg1-destination-result-item-button']:first-child");
 
     // Search buttons
     private By flightsSearchButton = By.cssSelector("button[data-testid='submit-button']");
@@ -55,12 +55,13 @@ public class HomePage {
     // Constructor - uses the driver that has launched the browser
     public HomePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(this.driver, 3);
+        this.wait = new WebDriverWait(driver, 30);
     }
 
     // click methods
     public void clickElement(By element) {
-        wait.until(ExpectedConditions.elementToBeClickable(element));
+        waitForElementToBeClickable(element);
+        // wait.until(ExpectedConditions.elementToBeClickable(element));
         driver.findElement(element).click();
     }
     public void clickFlightsLink() {
@@ -74,15 +75,15 @@ public class HomePage {
 
     // sendKeys methods - Flights
     public void setFlightsOrigin(String origin) {
-        driver.findElement(flightsOrigin).click();
+        clickElement(flightsOrigin);
         driver.findElement(flightsOriginInput).sendKeys(origin);
-        driver.findElement(flightsOriginSuggestedResult).click();
+        clickElement(flightsOriginSuggestedResult);
     }
 
     public void setFlightsDestination(String destination) {
-        driver.findElement(flightsDestination).click();
+        clickElement(flightsDestination);
         driver.findElement(flightsDestinationInput).sendKeys(destination);
-        driver.findElement(flightsDestinationSuggestedResult).click();
+        clickElement(flightsDestinationSuggestedResult);
     }
 
     public void setFlightsDepartureDate() {
@@ -97,7 +98,22 @@ public class HomePage {
 
     // Page handlers - Flights
     public FlightsPage clickFlightsSearch() {
-        driver.findElement(flightsSearchButton).click();
+        clickElement(flightsSearchButton);
         return new FlightsPage(driver);
     }
+
+    // Waits
+    /**
+     * Wait for the element to disappear from the page, usually indicating that the page has loaded.
+     * To identify the element's web locator, use F8 to stop the Script when it is still visible.
+     * @param element the element that needs to disappear
+     */
+    public void waitForElementToDisappear(By element) {
+        this.wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
+    }
+
+    public void waitForElementToBeClickable(By element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
 }

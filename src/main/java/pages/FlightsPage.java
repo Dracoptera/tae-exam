@@ -1,35 +1,93 @@
 package pages;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FlightsPage {
     private WebDriver driver;
-
     private WebDriverWait wait;
 
     private By sortBySelector = By.id("listings-sort");
     private By flightsDeckList = By.id("search-results");
-    // private By flightCard = By.cssSelector("ul[data-test-id='listings'] li > div");
-    // private By flightCard = By.cssSelector("button.uitk-card-link[data-test-id='select-link']");
     private By flightCard = By.cssSelector("ul[data-test-id='listings'] li[data-test-id='offer-listing']");
+    private By thirdFlightCard = By.cssSelector("ul[data-test-id='listings'] li[data-test-id='offer-listing']:nth-child(3)");
     private By flightDuration = By.cssSelector("div[data-test-id='journey-duration']");
     private By loadingAnimation = By.id("el_BOCLP6pw6");
 
-    private By listLoadedText = By.cssSelector("[data-test-id=\"listing-header-bar\"] div.uitk-text");
+    private By listLoadedText = By.cssSelector("[data-test-id='listing-header-bar'] div.uitk-text");
     private By showMoreButton = By.name("showMoreButton");
 
     private By continueBtn = By.cssSelector("button[data-test-id='select-button']");
 
-    public FlightsPage(WebDriver driver) {
+    public FlightsPage (WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(this.driver, 20);
+        this.wait = new WebDriverWait(driver, 20);
+    }
+
+    private List<WebElement> getWebElementList(By element) {
+        List<WebElement> listed = driver.findElements(element);
+        return listed;
+    }
+
+    public FlightInformationPage proceedToBooking() {
+        driver.findElement(flightCard).click();
+        wait.until(ExpectedConditions.elementToBeClickable(continueBtn));
+        driver.findElement(continueBtn).click();
+        wait.until(ExpectedConditions.elementToBeClickable(thirdFlightCard));
+        // wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("[data-test-id='offer-listing']")));
+        driver.findElement(thirdFlightCard).click();
+        wait.until(ExpectedConditions.elementToBeClickable(continueBtn));
+        driver.findElement(continueBtn).click();
+        return new FlightInformationPage(driver);
+    }
+    /**
+     * Returns a list containing the flight duration in minutes. The original format for each WebElement's text is: 'Xh Xm (Nonstop)'
+     * @param flightDurationList a list containing all the WebElements to be converted. These are the "Flight Duration" elements present on every result.
+     * @return a list containing all the elements in their equivalent in minutes
+     */
+    public List<Integer> flightDurationToInteger(List<WebElement> flightDurationList) {
+        ArrayList<Integer> durationsInMinutes = new ArrayList<>();
+
+        for(WebElement flightDuration: flightDurationList) {
+            String[] duration = flightDuration.getText().split(" ");
+            int hours = Integer.parseInt(duration[0].substring(0, duration[0].indexOf('h')));
+            int minutes = Integer.parseInt(duration[1].substring(0, duration[1].indexOf('m')));
+            int totalDuration = ((hours * 60) + minutes);
+            durationsInMinutes.add(totalDuration);
+        }
+
+        return durationsInMinutes;
+    }
+
+    public void sortByShortest() {
+        WebElement sortDropdown = driver.findElement(By.id("listings-sort"));
+        Select select = new Select(sortDropdown);
+        select.selectByValue("DURATION_INCREASING");
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("uitk-live-announce"), "Results now sorted by Duration (Shortest)"));
+    }
+
+    public boolean correctlySortedByShortest(List<Integer> durationInMinutes) {
+        sortByShortest();
+        //wait.until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("[data-test-id='offer-listing']"), 25));
+        for(int mins: durationInMinutes) {
+            System.out.println(mins);
+        }
+
+        return durationInMinutes.stream().sorted().collect(Collectors.toList()).equals(durationInMinutes);
+    }
+
+    public boolean sortAndVerifyDurations() {
+        // wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".loader-spacing .uitk-loading-bar")));
+        // wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("[data-test-id='offer-listing']")));
+        return correctlySortedByShortest(flightDurationToInteger(getWebElementList(flightDuration)));
     }
 
     public boolean sortBySelectorIsPresent() {
@@ -41,30 +99,26 @@ public class FlightsPage {
         WebElement sortDropdown = driver.findElement(By.id("listings-sort"));
         Select select = new Select(sortDropdown);
         List<WebElement> allOptions = select.getOptions();
-        boolean present = false;
 
         for(WebElement option : allOptions) {
-            if(option.getText().contains("Price")
+            if(!(option.getText().contains("Price")
                     || option.getText().contains("Departure")
                     || option.getText().contains("Arrival")
-                    || option.getText().contains("Duration")) {
-                present = true;
+                    || option.getText().contains("Duration"))) {
+                return false;
             }
         }
-
-        return present;
+        return true;
     }
 
-    // TODO VERIFY SELECTOR!
     public boolean allFlightsCanBeSelected() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(showMoreButton));
         List<WebElement> flights = driver.findElements(flightCard);
-        System.out.println(flights.size());
+        // System.out.println(flights.size());
 
         for(WebElement flight: flights) {
             flight.click();
             WebElement closeButton = driver.findElement(By.cssSelector("button[data-icon='tool-close']"));
-            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section[tabindex='-1']")));
             wait.until(ExpectedConditions.elementToBeClickable(continueBtn));
             if(!driver.findElement(continueBtn).isDisplayed()) {
                 return false;
@@ -77,16 +131,14 @@ public class FlightsPage {
     public boolean flightDurationIsPresent() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(showMoreButton));
         List<WebElement> flights = driver.findElements(flightCard);
-        // WebElement flightDuration = driver.findElement(By.cssSelector("div[data-test-id='journey-duration']"));
 
-        System.out.println(flights.size());
         for(WebElement flight:flights) {
-            System.out.println(flight.findElement(flightDuration).getText());
+            // System.out.println(flight.findElement(flightDuration).getText());
             if(!flight.findElement(flightDuration).isDisplayed()) {
                 return false;
             }
         }
-
         return true;
     }
+
 }
