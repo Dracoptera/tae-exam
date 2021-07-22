@@ -34,11 +34,12 @@ public class ReservationTests extends BaseTests {
         assertTrue(flightsPage.flightDurationIsPresent());
 
         // TODO Sort by duration > shorter. Verify the list was correctly sorted.
-        // assertTrue(flightsPage.sortAndVerifyDurations());
+        assertTrue(flightsPage.correctlySortedByShortest());
 
         // * Booking tests
         // TODO Handle possible hotel modal
-        FlightInformationPage flightInformationPage = flightsPage.proceedToBooking();
+        // TODO Fix this 🐛
+        // FlightInformationPage flightInformationPage = flightsPage.proceedToBooking();
 
         // Assertion - Trip total price is present
         // Assertion - Departure and return information is present

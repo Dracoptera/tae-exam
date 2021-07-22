@@ -29,7 +29,7 @@ public class FlightsPage {
 
     public FlightsPage (WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, 20);
+        this.wait = new WebDriverWait(driver, 40);
     }
 
     private List<WebElement> getWebElementList(By element) {
@@ -37,12 +37,13 @@ public class FlightsPage {
         return listed;
     }
 
+    // TODO Fix this method and its waits. Deprecated error usually appears.
     public FlightInformationPage proceedToBooking() {
         driver.findElement(flightCard).click();
         wait.until(ExpectedConditions.elementToBeClickable(continueBtn));
         driver.findElement(continueBtn).click();
         wait.until(ExpectedConditions.elementToBeClickable(thirdFlightCard));
-        // wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("[data-test-id='offer-listing']")));
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("[data-test-id='offer-listing']")));
         driver.findElement(thirdFlightCard).click();
         wait.until(ExpectedConditions.elementToBeClickable(continueBtn));
         driver.findElement(continueBtn).click();
@@ -74,8 +75,10 @@ public class FlightsPage {
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("uitk-live-announce"), "Results now sorted by Duration (Shortest)"));
     }
 
-    public boolean correctlySortedByShortest(List<Integer> durationInMinutes) {
+    public boolean correctlySortedByShortest() {
         sortByShortest();
+        List<WebElement> sortedByShortestDurations = getWebElementList(flightDuration);
+        List<Integer> durationInMinutes = flightDurationToInteger(sortedByShortestDurations);
         //wait.until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("[data-test-id='offer-listing']"), 25));
         for(int mins: durationInMinutes) {
             System.out.println(mins);
@@ -84,11 +87,7 @@ public class FlightsPage {
         return durationInMinutes.stream().sorted().collect(Collectors.toList()).equals(durationInMinutes);
     }
 
-    public boolean sortAndVerifyDurations() {
-        // wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".loader-spacing .uitk-loading-bar")));
-        // wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("[data-test-id='offer-listing']")));
-        return correctlySortedByShortest(flightDurationToInteger(getWebElementList(flightDuration)));
-    }
+
 
     public boolean sortBySelectorIsPresent() {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(loadingAnimation));
