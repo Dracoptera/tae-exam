@@ -37,13 +37,12 @@ public class FlightsPage {
         return listed;
     }
 
-    // TODO Fix this method and its waits. Deprecated error usually appears.
+    // TODO Shorten this method
     public FlightInformationPage proceedToBooking() {
         driver.findElement(flightCard).click();
         wait.until(ExpectedConditions.elementToBeClickable(continueBtn));
         driver.findElement(continueBtn).click();
-        wait.until(ExpectedConditions.elementToBeClickable(thirdFlightCard));
-        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("[data-test-id='offer-listing']")));
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("uitk-live-announce"), "Results now sorted by Price (Lowest)"));
         driver.findElement(thirdFlightCard).click();
         wait.until(ExpectedConditions.elementToBeClickable(continueBtn));
         driver.findElement(continueBtn).click();
@@ -79,15 +78,9 @@ public class FlightsPage {
         sortByShortest();
         List<WebElement> sortedByShortestDurations = getWebElementList(flightDuration);
         List<Integer> durationInMinutes = flightDurationToInteger(sortedByShortestDurations);
-        //wait.until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("[data-test-id='offer-listing']"), 25));
-        for(int mins: durationInMinutes) {
-            System.out.println(mins);
-        }
 
         return durationInMinutes.stream().sorted().collect(Collectors.toList()).equals(durationInMinutes);
     }
-
-
 
     public boolean sortBySelectorIsPresent() {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(loadingAnimation));

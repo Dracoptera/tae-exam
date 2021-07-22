@@ -39,7 +39,7 @@ public class ReservationTests extends BaseTests {
         // * Booking tests
         // TODO Handle possible hotel modal
         // TODO Fix this 🐛
-        // FlightInformationPage flightInformationPage = flightsPage.proceedToBooking();
+        FlightInformationPage flightInformationPage = flightsPage.proceedToBooking();
 
         // Assertion - Trip total price is present
         // Assertion - Departure and return information is present
