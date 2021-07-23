@@ -39,9 +39,10 @@ public class ReservationTests extends BaseTests {
         assertTrue(flightsPage.correctlySortedByShortest());
 
         // * Booking tests
-        // TODO Handle possible hotel modal
         FlightDetailsPage flightDetailsPage = flightsPage.proceedToFlightDetails();
 
+
+        // TODO Fix assertions
         // Assertion - Trip total price is present
         assertTrue(flightDetailsPage.tripTotalIsPresent());
         // Assertion - Departure and return information is present

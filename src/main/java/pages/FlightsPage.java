@@ -28,9 +28,19 @@ public class FlightsPage extends BasePage {
     private By showMoreButton = By.name("showMoreButton");
     private By continueBtn = By.cssSelector("button[data-test-id='select-button']");
 
+    // Hotels modal
+    private By addHotelModal = By.cssSelector("[data-test-id='xSellHotelForcedChoice']");
+    private By closeModalButton = By.cssSelector("[data-test-id='forcedChoiceNoThanks']");
+
     public FlightsPage (WebDriver driver) {
         super(driver);
         this.driver = driver;
+    }
+
+    public void closeModal() {
+        if (driver.findElement(addHotelModal).isDisplayed()) {
+            clickElement(closeModalButton);
+        }
     }
 
     public FlightDetailsPage proceedToFlightDetails() {
@@ -39,6 +49,7 @@ public class FlightsPage extends BasePage {
         waitForAnnouncementText(innerAnnouncement, "Results now sorted by Price (Lowest)");
         clickElement(thirdFlightCard);
         clickElement(continueBtn);
+        closeModal();
         return new FlightDetailsPage(driver);
     }
 
