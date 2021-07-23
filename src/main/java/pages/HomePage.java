@@ -8,13 +8,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class HomePage {
+public class HomePage extends BasePage {
 
     // TODO implement implicit waits
     // Test comment
 
     private WebDriver driver;
-    private WebDriverWait wait;
+    // private WebDriverWait wait;
 
     // Travel option selectors
     private By staysLink = By.cssSelector("ul>li:nth-child(1)");
@@ -54,16 +54,13 @@ public class HomePage {
 
     // Constructor - uses the driver that has launched the browser
     public HomePage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, 30);
+        // this.wait = new WebDriverWait(driver, 30);
     }
 
     // click methods
-    public void clickElement(By element) {
-        waitForElementToBeClickable(element);
-        // wait.until(ExpectedConditions.elementToBeClickable(element));
-        driver.findElement(element).click();
-    }
+
     public void clickFlightsLink() {
         clickElement(flightsLink);
     }
@@ -100,20 +97,6 @@ public class HomePage {
     public FlightsPage clickFlightsSearch() {
         clickElement(flightsSearchButton);
         return new FlightsPage(driver);
-    }
-
-    // Waits
-    /**
-     * Wait for the element to disappear from the page, usually indicating that the page has loaded.
-     * To identify the element's web locator, use F8 to stop the Script when it is still visible.
-     * @param element the element that needs to disappear
-     */
-    public void waitForElementToDisappear(By element) {
-        this.wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
-    }
-
-    public void waitForElementToBeClickable(By element) {
-        wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
 }

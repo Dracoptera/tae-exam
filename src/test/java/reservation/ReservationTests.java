@@ -1,8 +1,10 @@
 package reservation;
 
 import base.BaseTests;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.FlightInformationPage;
+import pages.FlightDetailsPage;
+import pages.FlightDetailsPage;
 import pages.FlightsPage;
 import pages.HomePage;
 
@@ -33,15 +35,15 @@ public class ReservationTests extends BaseTests {
         // Assertion - Flight duration is present on every result
         assertTrue(flightsPage.flightDurationIsPresent());
 
-        // TODO Sort by duration > shorter. Verify the list was correctly sorted.
+        // Assertion - Sort by duration > shorter. Verify the list was correctly sorted.
         assertTrue(flightsPage.correctlySortedByShortest());
 
         // * Booking tests
         // TODO Handle possible hotel modal
-        // TODO Fix this 🐛
-        FlightInformationPage flightInformationPage = flightsPage.proceedToBooking();
+        FlightDetailsPage flightDetailsPage = flightsPage.proceedToFlightDetails();
 
         // Assertion - Trip total price is present
+        assertTrue(flightDetailsPage.tripTotalIsPresent());
         // Assertion - Departure and return information is present
         // Assertion - Price guarantee text is present
 
