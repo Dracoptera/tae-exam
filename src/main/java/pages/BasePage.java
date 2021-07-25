@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class BasePage {
     private WebDriver driver;
@@ -43,6 +44,14 @@ public class BasePage {
 
     public void waitForElementToBeVisible(By locator) {
         getWait().until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public void waitForElementTest(WebElement element) {
+        getWait().until(ExpectedConditions.stalenessOf(element));
+    }
+
+    public void waitImplicitly() {
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     public WebDriverWait getWait() {

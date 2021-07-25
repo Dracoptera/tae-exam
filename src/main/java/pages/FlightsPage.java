@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class FlightsPage extends BasePage {
     private WebDriver driver;
-    private WebDriverWait wait;
+    // private WebDriverWait wait;
 
     // Page locators
     private By innerAnnouncement = By.id("uitk-live-announce");

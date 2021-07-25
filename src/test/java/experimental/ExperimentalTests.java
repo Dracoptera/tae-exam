@@ -22,6 +22,7 @@ public class ExperimentalTests extends BaseTests {
 
         FlightDetailsPage flightDetailsPage = flightsPage.proceedToFlightDetails();
 
-        assertTrue(flightDetailsPage.tripTotalIsPresent());
+        // flightDetailsPage.waitForPageToLoad();
+        assertTrue(flightDetailsPage.tripTotalHeader().contains("Trip total"), "Error with name");
     }
 }
