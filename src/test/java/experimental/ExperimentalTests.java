@@ -22,7 +22,8 @@ public class ExperimentalTests extends BaseTests {
 
         FlightDetailsPage flightDetailsPage = flightsPage.proceedToFlightDetails();
 
-        // flightDetailsPage.waitForPageToLoad();
+        // TODO FIX org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.cssSelector: div table.experimental-pricing (tried for 60 second(s) with 500 milliseconds interval)
+        flightDetailsPage.waitForPageToLoad();
         assertTrue(flightDetailsPage.tripTotalHeader().contains("Trip total"), "Error with name");
     }
 }

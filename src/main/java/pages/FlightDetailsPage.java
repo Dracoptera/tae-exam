@@ -18,6 +18,7 @@ public class FlightDetailsPage extends BasePage{
     // private By checkoutButton =By.cssSelector("button[data-test-id='goto-checkout-button']:not([disabled=''])");
     private By checkoutButton = By.cssSelector("button[data-test-id='goto-checkout-button']");
     private By skeletonTest = By.cssSelector("div[role='presentation']");
+    private By priceTable = By.cssSelector("div table.experimental-pricing");
 
     public FlightDetailsPage(WebDriver driver) {
         super(driver);
@@ -33,7 +34,7 @@ public class FlightDetailsPage extends BasePage{
         // waitForElementToBeClickable(checkoutButton);
         // waitForElementToDisappear(skeletonTest);
         // waitForElementToDisappear(priceSummary);
-        waitForElementToBeVisible(tripTotal);
+        waitForElementToBeVisible(priceTable);
         // waitForAnnouncementText(innerAnnouncement, "Loading flight details for your Las Vegas to Los Angeles Roundtrip journey");
         // waitForElementTest(driver.findElement(skeletonTest));
     }
@@ -48,7 +49,7 @@ public class FlightDetailsPage extends BasePage{
     }
 
     public String tripTotalHeader() {
-        waitImplicitly();
+        // waitImplicitly();
         // waitForElementToBeClickable(checkoutButton);
         // System.out.println(driver.findElement(tripTotal).getText());
         System.out.println(driver.findElement(By.cssSelector("td h3.uitk-heading-5")).getText());
