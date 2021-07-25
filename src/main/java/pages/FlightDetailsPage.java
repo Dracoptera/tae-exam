@@ -14,8 +14,9 @@ public class FlightDetailsPage extends BasePage{
 
     private By innerAnnouncement = By.id("uitk-live-announce");
     private By emptyBody = By.cssSelector("div[data-test-id='summary-skeleton']");
-    private By tripTotal = By.cssSelector("table[data-test-id='trip-total'] h3");
-    private By tripTotalAmount = By.cssSelector("table[data-test-id='trip-total'] span.uitk-text");
+    private By priceSummary = By.cssSelector("[data-test-id='price-summary-loading']");
+    private By tripTotal = By.cssSelector("h3.uitk-heading-5");
+    private By tripTotalAmount = By.cssSelector("td span.uitk-text");
     private By departureInfo = By.cssSelector("div[data-test-id='flight-review-0'] div h2");
     private By returnInfo = By.cssSelector("div[data-test-id='flight-review-1'] div h2");
     private By checkoutButton =By.cssSelector("button[data-test-id='goto-checkout-button']");
@@ -25,10 +26,19 @@ public class FlightDetailsPage extends BasePage{
         return new FlightCheckoutPage(driver);
     }
 
-    public boolean tripTotalIsPresent() {
-        waitForElementToDisappear(emptyBody);
-        waitForElementToBeClickable(checkoutButton);
+    public void waitForPageToLoad() {
+        // waitForElementToDisappear(emptyBody);
+        // waitForElementToDisappear(priceSummary);
+        waitForElementToBeVisible(tripTotal);
         // waitForAnnouncementText(innerAnnouncement, "Loading flight details for your Las Vegas to Los Angeles Roundtrip journey");
+    }
+
+    public boolean tripTotalIsPresent() {
+        // waitForPageToLoad();
+        // waitForElementToBeVisible(tripTotalAmount);
+        waitForElementToDisappear(priceSummary);
+        System.out.println(driver.findElement(tripTotal).getText());
+        System.out.println(driver.findElement(tripTotalAmount).getText());
         return driver.findElement(tripTotal).getText().contains("Trip total")
                 && driver.findElement(tripTotalAmount).getText().contains("$");
     }

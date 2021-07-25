@@ -43,6 +43,7 @@ public class ReservationTests extends BaseTests {
 
 
         // TODO Fix assertions
+        // flightDetailsPage.waitForPageToLoad();
         // Assertion - Trip total price is present
         assertTrue(flightDetailsPage.tripTotalIsPresent());
         // Assertion - Departure and return information is present

@@ -38,9 +38,7 @@ public class FlightsPage extends BasePage {
     }
 
     public void closeModal() {
-        if (driver.findElement(addHotelModal).isDisplayed()) {
             clickElement(closeModalButton);
-        }
     }
 
     public FlightDetailsPage proceedToFlightDetails() {
@@ -49,7 +47,9 @@ public class FlightsPage extends BasePage {
         waitForAnnouncementText(innerAnnouncement, "Results now sorted by Price (Lowest)");
         clickElement(thirdFlightCard);
         clickElement(continueBtn);
-        closeModal();
+        //if (driver.findElement(addHotelModal).isDisplayed()) {
+        //    closeModal();
+        //}
         return new FlightDetailsPage(driver);
     }
 
