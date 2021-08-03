@@ -4,8 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class BasePage {
@@ -54,7 +56,19 @@ public class BasePage {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
+    public void switchToNewTab() {
+        Set<String> handles = driver.getWindowHandles();
+        String currentHandle = driver.getWindowHandle();
+        for (String handle : handles) {
+
+            if (!handle.equals(currentHandle)) {
+                driver.switchTo().window(handle);
+            }
+        }
+    }
+
     public WebDriverWait getWait() {
         return this.wait;
     }
+
 }

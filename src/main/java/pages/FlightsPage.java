@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FlightsPage extends BasePage {
@@ -38,10 +39,10 @@ public class FlightsPage extends BasePage {
     }
 
     public void closeModal() {
-            clickElement(closeModalButton);
+        clickElement(closeModalButton);
     }
 
-    public FlightDetailsPage proceedToFlightDetails() {
+    public FlightDetailsPage proceedToFlightDetails()  {
         clickElement(flightCard);
         clickElement(continueBtn);
         waitForAnnouncementText(innerAnnouncement, "Results now sorted by Price (Lowest)");
@@ -50,6 +51,7 @@ public class FlightsPage extends BasePage {
         //if (driver.findElement(addHotelModal).isDisplayed()) {
         //    closeModal();
         //}
+        switchToNewTab();
         return new FlightDetailsPage(driver);
     }
 

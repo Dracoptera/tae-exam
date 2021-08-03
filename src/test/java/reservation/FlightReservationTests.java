@@ -3,20 +3,18 @@ package reservation;
 import base.BaseTests;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import pages.*;
 import pages.FlightDetailsPage;
-import pages.FlightDetailsPage;
-import pages.FlightsPage;
-import pages.HomePage;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class ReservationTests extends BaseTests {
+public class FlightReservationTests extends BaseTests {
 
     // TODO Replace hardcode with params
 
     @Test
-    public void verifyResultsPage() {
+    public void verifyResultsPage() throws InterruptedException {
         homePage.clickFlightsLink();
         homePage.setFlightsOrigin("LAS");
         homePage.setFlightsDestination("LAX");
@@ -30,7 +28,7 @@ public class ReservationTests extends BaseTests {
         assertTrue(flightsPage.sortByOptionsArePresent());
 
         // Assertion - The select button is present on every result
-        // assertTrue(flightsPage.allFlightsCanBeSelected());
+        assertTrue(flightsPage.allFlightsCanBeSelected());
 
         // Assertion - Flight duration is present on every result
         assertTrue(flightsPage.flightDurationIsPresent());
@@ -41,16 +39,23 @@ public class ReservationTests extends BaseTests {
         // * Booking tests
         FlightDetailsPage flightDetailsPage = flightsPage.proceedToFlightDetails();
 
-
-        // TODO Fix assertions
-        // flightDetailsPage.waitForPageToLoad();
+        flightDetailsPage.waitForPageToLoad();
         // Assertion - Trip total price is present
         assertTrue(flightDetailsPage.tripTotalIsPresent());
+
         // Assertion - Departure and return information is present
-        // Assertion - Price guarantee text is present
+        assertTrue(flightDetailsPage.departureAndReturnInfoArePresent());
+
+        // Assertion - Price guarantee text is present - [This element is no longer present]
 
         // * Checkout tests
+        FlightCheckoutPage flightCheckoutPage = flightDetailsPage.clickCheckout();
+
+        flightCheckoutPage.waitForPageToLoad();
         // Choose at least 5 validations to be performed
+        assertTrue(flightCheckoutPage.travellerInfoIsPresent());
+        assertTrue(flightCheckoutPage.insuranceIsPresent());
+        assertTrue(flightCheckoutPage.paymentIsPresent());
     }
 
 }

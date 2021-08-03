@@ -10,7 +10,7 @@ import java.util.List;
 
 public class HomePage extends BasePage {
 
-    // TODO implement implicit waits
+    // TODO clean Xpaths
     // Test comment
 
     private WebDriver driver;
@@ -26,8 +26,11 @@ public class HomePage extends BasePage {
     private By firstDate = By.id("d1-btn");
     private By finalDate  = By.id("d2-btn");
     private By firstDayOfMonth = By.cssSelector("[data-day='1']");
-    private By lastDayOfMonth = By.cssSelector("[data-day='28']");
+    private By lastDayOfMonth = By.cssSelector("[data-day='13']");
     private By dateDoneButton = By.cssSelector("[data-stid='apply-date-picker']");
+    private By flightsCheckIn = By.xpath("(//button[@id='d1-btn'])[2]");
+    private By flightsCheckInArrow = By.xpath("/html/body/div[1]/div[1]/div/div[1]/div/div[1]/div[2]/div/figure/div[3]/div/div/div/div[2]/div/form/div[2]/div/div[1]/div[2]/div[4]/div/div/div[1]/div/div[2]/div/div[2]/div[1]/button[2]");
+    private By confirmCheckInDate = By.cssSelector("[data-stid='apply-date-picker'");
 
     // Input selectors - Stays
     private By staysDestination = By.id("location-field-destination-input");
@@ -40,6 +43,7 @@ public class HomePage extends BasePage {
     private By flightsDestination = By.id("location-field-leg1-destination-menu");
     private By flightsDestinationInput = By.id("location-field-leg1-destination");
     private By flightsNextMonthArrow = By.xpath("//*[@id=\"wizard-flight-tab-roundtrip\"]/div[2]/div[2]/div/div/div[1]/div/div[2]/div/div[2]/div[1]/button[2]");
+    private By addStayToFlight = By.id("add-hotel-checkbox");
 
     // Input selectors - Packages
     private By packagesOrigin = By.id("location-field-origin-menu");
@@ -65,10 +69,16 @@ public class HomePage extends BasePage {
         clickElement(flightsLink);
     }
 
+    public void clickFlightsPlusHotel() {
+        clickFlightsLink();
+        driver.findElement(addStayToFlight).click();
+    }
+
     // sendKeys methods - Stays
     public void setStaysDestination(String destination) {
         driver.findElement(staysDestination).sendKeys(destination);
     }
+
 
     // sendKeys methods - Flights
     public void setFlightsOrigin(String origin) {
@@ -93,10 +103,24 @@ public class HomePage extends BasePage {
         clickElement(dateDoneButton);
     }
 
+    public void setFlightsStayDate() {
+        clickElement(flightsCheckIn);
+        for(int i = 0; i < 4; i++) {
+            clickElement(flightsCheckInArrow);
+        }
+        clickElement(firstDayOfMonth);
+        clickElement(lastDayOfMonth);
+        clickElement(confirmCheckInDate);
+    }
+
     // Page handlers - Flights
     public FlightsPage clickFlightsSearch() {
         clickElement(flightsSearchButton);
         return new FlightsPage(driver);
     }
 
+    public HotelSearchPage clickFlightsPlusHotelSearch() {
+        clickElement(flightsSearchButton);
+        return new HotelSearchPage(driver);
+    }
 }
