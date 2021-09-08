@@ -55,6 +55,15 @@ public class FlightsPage extends BasePage {
         return new FlightDetailsPage(driver);
     }
 
+    public FlightDetailsPage proceedToFlightWithStays() {
+        clickElement(flightCard);
+        clickElement(continueBtn);
+        waitForAnnouncementText(innerAnnouncement, "Results now sorted by Price (Lowest)");
+        clickElement(thirdFlightCard);
+        clickElement(continueBtn);
+        return new FlightDetailsPage(driver);
+    }
+
     /**
      * Returns a list containing the flight duration in minutes. The original format for each WebElement's text is: 'Xh Xm (Nonstop)'
      * @param flightDurationList a list containing all the WebElements to be converted. These are the "Flight Duration" elements present on every result.

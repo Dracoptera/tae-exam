@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -30,10 +31,25 @@ public class BasePage {
         return driver.findElements(element);
     }
 
+    public String extractDigits(String src) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < src.length(); i++) {
+            char c = src.charAt(i);
+            if (Character.isDigit(c)) {
+                builder.append(c);
+            }
+        }
+        return builder.toString();
+    }
+
     // Waits
 
     public void waitForElementToBeClickable(By locator) {
         getWait().until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public void waitForWebElementToBeClickable(WebElement element) {
+        getWait().until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public void waitForElementToDisappear(By locator) {
@@ -69,6 +85,11 @@ public class BasePage {
 
     public WebDriverWait getWait() {
         return this.wait;
+    }
+
+    public void scrollToBottom() {
+        ((JavascriptExecutor)driver).executeScript(
+                "document.body.scrollTop = -1 >>> 1");
     }
 
 }

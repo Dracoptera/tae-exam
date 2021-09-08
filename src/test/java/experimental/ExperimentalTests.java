@@ -4,10 +4,7 @@ import base.BaseTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.FlightCheckoutPage;
-import pages.FlightDetailsPage;
-import pages.FlightsPage;
-import pages.HotelSearchPage;
+import pages.*;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -29,5 +26,12 @@ public class ExperimentalTests extends BaseTests {
 
         assertTrue(hotelSearchPage.correctlySortedByPrice());
 
+        HotelDetailsPage hotelDetailsPage = hotelSearchPage.clickHotelAboveRating(3);
+
+        FlightsPage flightsPage = hotelDetailsPage.clickFirstRoom();
+
+        FlightDetailsPage flightDetailsPage = flightsPage.proceedToFlightWithStays();
+
+        flightDetailsPage.addCar();
     }
 }

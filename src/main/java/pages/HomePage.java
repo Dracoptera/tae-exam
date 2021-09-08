@@ -29,7 +29,7 @@ public class HomePage extends BasePage {
     private By lastDayOfMonth = By.cssSelector("[data-day='13']");
     private By dateDoneButton = By.cssSelector("[data-stid='apply-date-picker']");
     private By flightsCheckIn = By.xpath("(//button[@id='d1-btn'])[2]");
-    private By flightsCheckInArrow = By.xpath("/html/body/div[1]/div[1]/div/div[1]/div/div[1]/div[2]/div/figure/div[3]/div/div/div/div[2]/div/form/div[2]/div/div[1]/div[2]/div[4]/div/div/div[1]/div/div[2]/div/div[2]/div[1]/button[2]");
+    private By flightsCheckInArrow = By.xpath("//button[contains(@data-stid, 'date-picker-paging')][2]");
     private By confirmCheckInDate = By.cssSelector("[data-stid='apply-date-picker'");
 
     // Input selectors - Stays
