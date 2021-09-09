@@ -92,4 +92,12 @@ public class BasePage {
                 "document.body.scrollTop = -1 >>> 1");
     }
 
+    public void closeModalIfPresent(By modalLocator, By closeLocator) {
+        try {
+            waitForElementToBeVisible(modalLocator);
+            clickElement(closeLocator);
+        } catch (Exception e) {
+            System.out.printf("The promotion modal is not present.");
+        }
+    }
 }

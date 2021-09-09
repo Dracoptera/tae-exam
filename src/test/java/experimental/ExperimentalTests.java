@@ -33,5 +33,15 @@ public class ExperimentalTests extends BaseTests {
         FlightDetailsPage flightDetailsPage = flightsPage.proceedToFlightWithStays();
 
         flightDetailsPage.addCar();
+
+        // * Checkout tests
+        FlightCheckoutPage flightCheckoutPage = flightDetailsPage.clickFinalDetails();
+
+        flightCheckoutPage.waitForPageToLoad();
+
+        // Choose at least 5 validations to be performed
+        assertTrue(flightCheckoutPage.travellerInfoIsPresent());
+        assertTrue(flightCheckoutPage.insuranceIsPresent());
+        assertTrue(flightCheckoutPage.paymentIsPresent());
     }
 }

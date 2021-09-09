@@ -48,9 +48,8 @@ public class FlightsPage extends BasePage {
         waitForAnnouncementText(innerAnnouncement, "Results now sorted by Price (Lowest)");
         clickElement(thirdFlightCard);
         clickElement(continueBtn);
-        //if (driver.findElement(addHotelModal).isDisplayed()) {
-        //    closeModal();
-        //}
+        closeModalIfPresent(addHotelModal, closeModalButton);
+
         switchToNewTab();
         return new FlightDetailsPage(driver);
     }
