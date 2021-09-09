@@ -34,7 +34,8 @@ public class HomePage extends BasePage {
 
     // Input selectors - Stays
     private By staysDestination = By.id("location-field-destination-input");
-    private By staysDestinationInput = By.id("location-field-destination");
+    private By staysDestinationInput = By.cssSelector("[data-stid='location-field-destination-menu-trigger']");
+    private By firstResultDestination = By.cssSelector("[data-stid='location-field-destination-result-item']:first-child");
     private By staysAddFlight = By.id("add-flight-switch");
 
     // Input selectors - Flights
@@ -75,8 +76,11 @@ public class HomePage extends BasePage {
     }
 
     // sendKeys methods - Stays
+    // TODO Implement wait so result can be searched for
     public void setStaysDestination(String destination) {
-        driver.findElement(staysDestination).sendKeys(destination);
+        driver.findElement(staysDestinationInput).sendKeys(destination);
+        waitImplicitly();
+        clickElement(firstResultDestination);
     }
 
 

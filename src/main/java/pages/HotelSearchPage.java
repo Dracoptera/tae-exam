@@ -26,6 +26,8 @@ public class HotelSearchPage extends BasePage {
     private By thumbnailSkeleton = By.cssSelector("div.uitk-skeleton-image");
     private By hotelRating = By.cssSelector("[data-stid='content-hotel-reviews-rating']");
 
+    private By sponsoredHeader = By.cssSelector("[data-stid='results-header-messages'] div.uitk-text");
+
     public void sortByPrice() {
         WebElement sortDropdown = driver.findElement(sortBySelector);
         Select select = new Select(sortDropdown);
@@ -69,5 +71,9 @@ public class HotelSearchPage extends BasePage {
         actions.moveToElement(minimumRated(stars)).click().perform();
         switchToNewTab();
         return new HotelDetailsPage(driver);
+    }
+
+    public boolean sponsoredResultsArePresent() {
+        return driver.findElement(sponsoredHeader).getText().contains("What we are paid impacts our sort order");
     }
 }
