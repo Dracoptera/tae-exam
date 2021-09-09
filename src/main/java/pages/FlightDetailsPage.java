@@ -13,7 +13,7 @@ public class FlightDetailsPage extends BasePage{
     private By returnMoreInfo = By.cssSelector("div[data-test-id='flight-review-1'] div[data-test-id='show-details-link'] button");
     // private By checkoutButton =By.cssSelector("button[data-test-id='goto-checkout-button']:not([disabled=''])");
     private By checkoutButton = By.cssSelector("button[data-test-id='goto-checkout-button']");
-    private By addCarButton = By.cssSelector("data-stid='ground_transfers_add_to_trip'");
+    private By addCarButton = By.cssSelector("button[data-stid='ground_transfers_add_to_trip']");
 
     public FlightDetailsPage(WebDriver driver) {
         super(driver);
