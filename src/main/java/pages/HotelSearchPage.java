@@ -27,6 +27,7 @@ public class HotelSearchPage extends BasePage {
     private By hotelRating = By.cssSelector("[data-stid='content-hotel-reviews-rating']");
 
     private By sponsoredHeader = By.cssSelector("[data-stid='results-header-messages'] div.uitk-text");
+    private By discountOffer = By.cssSelector(".uitk-messaging-card div h3");
 
     public void sortByPrice() {
         WebElement sortDropdown = driver.findElement(sortBySelector);
@@ -75,5 +76,9 @@ public class HotelSearchPage extends BasePage {
 
     public boolean sponsoredResultsArePresent() {
         return driver.findElement(sponsoredHeader).getText().contains("What we are paid impacts our sort order");
+    }
+
+    public boolean discountOptionIsPresent() {
+        return driver.findElement(discountOffer).getText().contains("You could save 10% or more right now");
     }
 }

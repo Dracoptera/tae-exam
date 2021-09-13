@@ -18,6 +18,6 @@ public class ExperimentalTests extends BaseTests {
 
         Assert.assertTrue(hotelSearchPage.sponsoredResultsArePresent());
 
-
+        Assert.assertTrue(hotelSearchPage.discountOptionIsPresent());
     }
 }
