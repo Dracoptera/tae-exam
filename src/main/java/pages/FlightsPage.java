@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -129,6 +130,9 @@ public class FlightsPage extends BasePage {
                 return false;
             }
             closeButton.click();
+            for(int i = 0; i <= 3; i++) {
+                driver.findElement(By.tagName("body")).sendKeys(Keys.DOWN);
+            }
         }
         return true;
     }
