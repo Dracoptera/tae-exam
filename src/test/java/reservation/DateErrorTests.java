@@ -1,18 +1,12 @@
-package experimental;
+package reservation;
 
 import base.BaseTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.*;
 
-import static org.testng.Assert.assertTrue;
-
-public class ExperimentalTests extends BaseTests {
-
-    // TODO Rename Tests
-
+public class DateErrorTests extends BaseTests {
     @Test
-    public void testDetailsPage()  {
+    public void testDateErrors()  {
         homePage.clickFlightsPlusHotel();
         homePage.setFlightsOrigin("LAS");
         homePage.setFlightsDestination("LAX");

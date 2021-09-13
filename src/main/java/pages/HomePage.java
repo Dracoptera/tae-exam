@@ -57,6 +57,8 @@ public class HomePage extends BasePage {
     // Search buttons
     private By flightsSearchButton = By.cssSelector("button[data-testid='submit-button']");
 
+    private By firstStaysDateError = By.id("d1-error");
+
     // Constructor - uses the driver that has launched the browser
     public HomePage(WebDriver driver) {
         super(driver);
@@ -126,5 +128,9 @@ public class HomePage extends BasePage {
     public HotelSearchPage clickFlightsPlusHotelSearch() {
         clickElement(flightsSearchButton);
         return new HotelSearchPage(driver);
+    }
+
+    public boolean staysDateErrorIsPresent() {
+        return driver.findElement(firstStaysDateError).getText().contains("Your check-in date must fall within your departing and returning dates");
     }
 }
