@@ -13,12 +13,8 @@ public class ExperimentalTests extends BaseTests {
 
     @Test
     public void testDetailsPage()  {
-        homePage.clickFlightsPlusHotel();
-        homePage.setFlightsOrigin("LAS");
-        homePage.setFlightsDestination("LAX");
-        homePage.setFlightsDepartureDate();
-        homePage.clickFlightsPlusHotelSearch();
+        homePage.setCruiseDestination();
 
-        Assert.assertTrue(homePage.staysDateErrorIsPresent());
+        CruiseSearchPage cruiseSearchPage = homePage.cruiseSearchPage();
     }
 }

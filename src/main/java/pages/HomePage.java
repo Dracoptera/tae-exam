@@ -2,8 +2,10 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
@@ -50,9 +52,13 @@ public class HomePage extends BasePage {
     private By packagesOrigin = By.id("location-field-origin-menu");
     private By packagesDestination = By.id("location-field-destination-menu");
 
+    // Input Selectors - Cruises
+    private By cruiseDestination = By.id("cruise-destination");
+
     // Suggested result selectors - Flights
     private By flightsOriginSuggestedResult = By.cssSelector("[data-stid='location-field-leg1-origin-result-item-button']:first-child");
     private By flightsDestinationSuggestedResult = By.cssSelector("[data-stid='location-field-leg1-destination-result-item-button']:first-child");
+
 
     // Search buttons
     private By flightsSearchButton = By.cssSelector("button[data-testid='submit-button']");
@@ -99,6 +105,13 @@ public class HomePage extends BasePage {
         clickElement(flightsDestinationSuggestedResult);
     }
 
+    public void setCruiseDestination() {
+        clickElement(cruisesLink);
+        WebElement sortDropdown = driver.findElement(cruiseDestination);
+        Select select = new Select(sortDropdown);
+        select.selectByValue("europe");
+    }
+
     public void setFlightsDepartureDate() {
         clickElement(firstDate);
         for(int i = 0; i < 4; i++) {
@@ -128,6 +141,11 @@ public class HomePage extends BasePage {
     public HotelSearchPage clickFlightsPlusHotelSearch() {
         clickElement(flightsSearchButton);
         return new HotelSearchPage(driver);
+    }
+
+    public CruiseSearchPage cruiseSearchPage() {
+        clickElement(flightsSearchButton);
+        return new CruiseSearchPage(driver);
     }
 
     public boolean staysDateErrorIsPresent() {
