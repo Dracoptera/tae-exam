@@ -2,11 +2,15 @@ package reservation;
 
 import base.BaseTests;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.CruiseDetailsPage;
 import pages.CruiseSearchPage;
 
+@Listeners(listener.Listener.class)
+
 public class CruiseTests extends BaseTests {
+
     // * These tests correspond to exercise 5
 
     @Test

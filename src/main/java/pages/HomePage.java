@@ -78,13 +78,11 @@ public class HomePage extends BasePage {
     }
 
     // sendKeys methods - Stays
-    // TODO Implement wait so result can be searched for
     public void setStaysDestination(String destination) {
         clickElement(staysLink);
         getDriver().findElement(staysDestinationInput).sendKeys(destination);
         clickElement(firstResultDestination);
     }
-
 
     // sendKeys methods - Flights
     public void setFlightsOrigin(String origin) {

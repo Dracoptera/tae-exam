@@ -1,10 +1,13 @@
 package reservation;
 
 import base.BaseTests;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.*;
 import pages.FlightDetailsPage;
 import static org.testng.Assert.assertTrue;
+
+@Listeners(listener.Listener.class)
 
 public class FlightReservationTests extends BaseTests {
 

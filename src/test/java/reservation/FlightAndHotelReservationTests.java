@@ -1,10 +1,12 @@
 package reservation;
 
 import base.BaseTests;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.*;
-
 import static org.testng.Assert.assertTrue;
+
+@Listeners(listener.Listener.class)
 
 public class FlightAndHotelReservationTests extends BaseTests {
 
@@ -40,7 +42,6 @@ public class FlightAndHotelReservationTests extends BaseTests {
 
         // Choose at least 5 validations to be performed
         // TODO Double check locators for these methods. The page seems to be a bit different.
-        assertTrue(flightCheckoutPage.travellerInfoIsPresent());
         assertTrue(flightCheckoutPage.insuranceIsPresent());
         assertTrue(flightCheckoutPage.paymentIsPresent());
     }

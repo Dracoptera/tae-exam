@@ -50,7 +50,7 @@ public class FlightsPage extends BasePage {
         closeModalIfPresent(addHotelModal, closeModalButton);
 
         switchToNewTab();
-        return new FlightDetailsPage(driver);
+        return new FlightDetailsPage(getDriver());
     }
 
     public FlightDetailsPage proceedToFlightWithStays() {
