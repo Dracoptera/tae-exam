@@ -8,6 +8,8 @@ import pages.HotelSearchPage;
 public class HotelSearchTests extends BaseTests {
     @Test
     public void testHotelSearch()  {
+        // * These tests correspond to exercise 3
+
         homePage.setStaysDestination("Montevideo, Uruguay");
 
         // * Tests on results page

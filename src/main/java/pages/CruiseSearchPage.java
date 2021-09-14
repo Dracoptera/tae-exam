@@ -23,7 +23,7 @@ public class CruiseSearchPage extends BasePage {
     public CruiseDetailsPage selectFirstCruise() {
         clickElement(continueBtn);
         switchToNewTab();
-        return new CruiseDetailsPage(driver);
+        return new CruiseDetailsPage(getDriver());
     }
 
 }

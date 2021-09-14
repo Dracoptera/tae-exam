@@ -7,6 +7,8 @@ import pages.CruiseDetailsPage;
 import pages.CruiseSearchPage;
 
 public class CruiseTests extends BaseTests {
+    // * These tests correspond to exercise 5
+
     @Test
     public void testCruiseDetails()  {
         homePage.setCruiseDestination();

@@ -20,6 +20,6 @@ public class HotelDetailsPage extends BasePage {
             getDriver().findElement(By.tagName("body")).sendKeys(Keys.DOWN);
         }
         clickElement(firstRoom);
-        return new FlightsPage(driver);
+        return new FlightsPage(getDriver());
     }
 }

@@ -59,7 +59,7 @@ public class FlightsPage extends BasePage {
         waitForAnnouncementText(innerAnnouncement, "Results now sorted by Price (Lowest)");
         clickElement(thirdFlightCard);
         clickElement(continueBtn);
-        return new FlightDetailsPage(driver);
+        return new FlightDetailsPage(getDriver());
     }
 
     /**

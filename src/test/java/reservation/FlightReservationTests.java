@@ -1,15 +1,14 @@
 package reservation;
 
 import base.BaseTests;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.*;
 import pages.FlightDetailsPage;
-
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class FlightReservationTests extends BaseTests {
+
+    // * These tests correspond to exercise 1
 
     // TODO Replace hardcode with params
 

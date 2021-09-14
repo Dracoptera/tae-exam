@@ -15,7 +15,6 @@ public class HotelSearchPage extends BasePage {
 
     public HotelSearchPage(WebDriver driver) {
         super(driver);
-        this.driver = driver;
     }
 
     private By innerAnnouncement = By.id("uitk-live-announce");
@@ -30,7 +29,7 @@ public class HotelSearchPage extends BasePage {
     private By discountOffer = By.cssSelector(".uitk-messaging-card div h3");
 
     public void sortByPrice() {
-        WebElement sortDropdown = driver.findElement(sortBySelector);
+        WebElement sortDropdown = getDriver().findElement(sortBySelector);
         Select select = new Select(sortDropdown);
         select.selectByValue("PRICE_LOW_TO_HIGH");
         waitForElementToBeVisible(hotelInformationCard);
@@ -68,17 +67,17 @@ public class HotelSearchPage extends BasePage {
     }
 
     public HotelDetailsPage clickHotelAboveRating(int stars) {
-        Actions actions = new Actions(driver);
+        Actions actions = new Actions(getDriver());
         actions.moveToElement(minimumRated(stars)).click().perform();
         switchToNewTab();
-        return new HotelDetailsPage(driver);
+        return new HotelDetailsPage(getDriver());
     }
 
     public boolean sponsoredResultsArePresent() {
-        return driver.findElement(sponsoredHeader).getText().contains("What we are paid impacts our sort order");
+        return getDriver().findElement(sponsoredHeader).getText().contains("What we are paid impacts our sort order");
     }
 
     public boolean discountOptionIsPresent() {
-        return driver.findElement(discountOffer).getText().contains("You could save 10% or more right now");
+        return getDriver().findElement(discountOffer).getText().contains("You could save 10% or more right now");
     }
 }

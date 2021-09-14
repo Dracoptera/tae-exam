@@ -129,17 +129,17 @@ public class HomePage extends BasePage {
     // Page handlers - Flights
     public FlightsPage clickFlightsSearch() {
         clickElement(flightsSearchButton);
-        return new FlightsPage(driver);
+        return new FlightsPage(getDriver());
     }
 
     public HotelSearchPage clickFlightsPlusHotelSearch() {
         clickElement(flightsSearchButton);
-        return new HotelSearchPage(driver);
+        return new HotelSearchPage(getDriver());
     }
 
     public CruiseSearchPage cruiseSearchPage() {
         clickElement(flightsSearchButton);
-        return new CruiseSearchPage(driver);
+        return new CruiseSearchPage(getDriver());
     }
 
     public boolean staysDateErrorIsPresent() {

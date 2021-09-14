@@ -8,6 +8,8 @@ import static org.testng.Assert.assertTrue;
 
 public class FlightAndHotelReservationTests extends BaseTests {
 
+    // * These tests correspond to exercise 2
+
     @Test
     public void testReservationWithHotel()  {
         homePage.clickFlightsPlusHotel();
