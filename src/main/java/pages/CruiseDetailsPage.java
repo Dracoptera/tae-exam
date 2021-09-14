@@ -14,7 +14,6 @@ public class CruiseDetailsPage extends BasePage {
 
     public CruiseDetailsPage(WebDriver driver) {
         super(driver);
-        this.driver = driver;
     }
 
     public void waitForPageToLoad(){
@@ -22,10 +21,10 @@ public class CruiseDetailsPage extends BasePage {
     }
 
     public boolean cruiseNameIsPresent() {
-        return !driver.findElement(cruiseName).getText().equals("");
+        return !getDriver().findElement(cruiseName).getText().equals("");
     }
 
     public boolean cruiseTitleIsPresent() {
-        return !driver.findElement(cruiseTitle).getText().equals("");
+        return !getDriver().findElement(cruiseTitle).getText().equals("");
     }
 }

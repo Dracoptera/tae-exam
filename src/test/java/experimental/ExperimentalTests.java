@@ -9,8 +9,6 @@ import static org.testng.Assert.assertTrue;
 
 public class ExperimentalTests extends BaseTests {
 
-    // TODO Rename Tests
-
     @Test
     public void testDetailsPage()  {
         homePage.setCruiseDestination();

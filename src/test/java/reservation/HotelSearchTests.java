@@ -7,7 +7,7 @@ import pages.HotelSearchPage;
 
 public class HotelSearchTests extends BaseTests {
     @Test
-    public void testDetailsPage()  {
+    public void testHotelSearch()  {
         homePage.setStaysDestination("Montevideo, Uruguay");
 
         // * Tests on results page

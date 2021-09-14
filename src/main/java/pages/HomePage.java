@@ -12,11 +12,7 @@ import java.util.List;
 
 public class HomePage extends BasePage {
 
-    // TODO clean Xpaths
-    // Test comment
-
     private WebDriver driver;
-    // private WebDriverWait wait;
 
     // Travel option selectors
     private By staysLink = By.cssSelector("ul>li:nth-child(1)");
@@ -45,7 +41,7 @@ public class HomePage extends BasePage {
     private By flightsOriginInput = By.id("location-field-leg1-origin");
     private By flightsDestination = By.id("location-field-leg1-destination-menu");
     private By flightsDestinationInput = By.id("location-field-leg1-destination");
-    private By flightsNextMonthArrow = By.xpath("//*[@id=\"wizard-flight-tab-roundtrip\"]/div[2]/div[2]/div/div/div[1]/div/div[2]/div/div[2]/div[1]/button[2]");
+    private By flightsNextMonthArrow = By.xpath("//button[contains(@data-stid, 'date-picker-paging')][2]");
     private By addStayToFlight = By.id("add-hotel-checkbox");
 
     // Input selectors - Packages
@@ -68,8 +64,6 @@ public class HomePage extends BasePage {
     // Constructor - uses the driver that has launched the browser
     public HomePage(WebDriver driver) {
         super(driver);
-        this.driver = driver;
-        // this.wait = new WebDriverWait(driver, 30);
     }
 
     // click methods
@@ -80,14 +74,14 @@ public class HomePage extends BasePage {
 
     public void clickFlightsPlusHotel() {
         clickFlightsLink();
-        driver.findElement(addStayToFlight).click();
+        getDriver().findElement(addStayToFlight).click();
     }
 
     // sendKeys methods - Stays
     // TODO Implement wait so result can be searched for
     public void setStaysDestination(String destination) {
         clickElement(staysLink);
-        driver.findElement(staysDestinationInput).sendKeys(destination);
+        getDriver().findElement(staysDestinationInput).sendKeys(destination);
         clickElement(firstResultDestination);
     }
 
@@ -95,19 +89,19 @@ public class HomePage extends BasePage {
     // sendKeys methods - Flights
     public void setFlightsOrigin(String origin) {
         clickElement(flightsOrigin);
-        driver.findElement(flightsOriginInput).sendKeys(origin);
+        getDriver().findElement(flightsOriginInput).sendKeys(origin);
         clickElement(flightsOriginSuggestedResult);
     }
 
     public void setFlightsDestination(String destination) {
         clickElement(flightsDestination);
-        driver.findElement(flightsDestinationInput).sendKeys(destination);
+        getDriver().findElement(flightsDestinationInput).sendKeys(destination);
         clickElement(flightsDestinationSuggestedResult);
     }
 
     public void setCruiseDestination() {
         clickElement(cruisesLink);
-        WebElement sortDropdown = driver.findElement(cruiseDestination);
+        WebElement sortDropdown = getDriver().findElement(cruiseDestination);
         Select select = new Select(sortDropdown);
         select.selectByValue("europe");
     }
@@ -149,6 +143,6 @@ public class HomePage extends BasePage {
     }
 
     public boolean staysDateErrorIsPresent() {
-        return driver.findElement(firstStaysDateError).getText().contains("Your check-in date must fall within your departing and returning dates");
+        return getDriver().findElement(firstStaysDateError).getText().contains("Your check-in date must fall within your departing and returning dates");
     }
 }

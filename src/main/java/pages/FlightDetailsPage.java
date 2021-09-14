@@ -18,17 +18,16 @@ public class FlightDetailsPage extends BasePage{
 
     public FlightDetailsPage(WebDriver driver) {
         super(driver);
-        this.driver = driver;
     }
 
     public FlightCheckoutPage clickCheckout() {
         clickElement(checkoutButton);
-        return new FlightCheckoutPage(driver);
+        return new FlightCheckoutPage(getDriver());
     }
 
     public FlightCheckoutPage clickFinalDetails() {
         clickElement(finalDetailsButton);
-        return new FlightCheckoutPage(driver);
+        return new FlightCheckoutPage(getDriver());
     }
 
     public void waitForPageToLoad() {
@@ -40,13 +39,13 @@ public class FlightDetailsPage extends BasePage{
     }
 
     public boolean tripTotalIsPresent() {
-        return driver.findElement(tripTotal).getText().contains("Trip total")
-                && driver.findElement(tripTotalAmount).getText().contains("$");
+        return getDriver().findElement(tripTotal).getText().contains("Trip total")
+                && getDriver().findElement(tripTotalAmount).getText().contains("$");
     }
 
     public boolean departureAndReturnInfoArePresent() {
-        return driver.findElement(returnMoreInfo).getText().contains("Show details")
-                && driver.findElement(departureMoreInfo).getText().contains("Show details");
+        return getDriver().findElement(returnMoreInfo).getText().contains("Show details")
+                && getDriver().findElement(departureMoreInfo).getText().contains("Show details");
     }
 
 }

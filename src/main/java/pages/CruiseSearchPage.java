@@ -13,7 +13,6 @@ public class CruiseSearchPage extends BasePage {
 
     public CruiseSearchPage(WebDriver driver) {
         super(driver);
-        this.driver = driver;
     }
 
     public void filterOverFifteenNights() {

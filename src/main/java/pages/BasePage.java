@@ -87,6 +87,10 @@ public class BasePage {
         return this.wait;
     }
 
+    public WebDriver getDriver() {
+        return this.driver;
+    }
+
     public void scrollToBottom() {
         ((JavascriptExecutor)driver).executeScript(
                 "document.body.scrollTop = -1 >>> 1");

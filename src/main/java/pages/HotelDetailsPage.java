@@ -13,12 +13,11 @@ public class HotelDetailsPage extends BasePage {
 
     public HotelDetailsPage(WebDriver driver) {
         super(driver);
-        this.driver = driver;
     }
 
     public FlightsPage clickFirstRoom() {
         for(int i = 0; i <= 15; i++) {
-            driver.findElement(By.tagName("body")).sendKeys(Keys.DOWN);
+            getDriver().findElement(By.tagName("body")).sendKeys(Keys.DOWN);
         }
         clickElement(firstRoom);
         return new FlightsPage(driver);

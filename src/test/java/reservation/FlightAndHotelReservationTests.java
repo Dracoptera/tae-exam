@@ -9,7 +9,7 @@ import static org.testng.Assert.assertTrue;
 public class FlightAndHotelReservationTests extends BaseTests {
 
     @Test
-    public void testDetailsPage()  {
+    public void testReservationWithHotel()  {
         homePage.clickFlightsPlusHotel();
         homePage.setFlightsOrigin("LAS");
         homePage.setFlightsDestination("LAX");

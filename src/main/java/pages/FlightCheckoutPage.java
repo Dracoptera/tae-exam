@@ -14,7 +14,6 @@ public class FlightCheckoutPage extends BasePage {
 
     public FlightCheckoutPage(WebDriver driver) {
         super(driver);
-        this.driver = driver;
     }
 
     public void waitForPageToLoad() {
@@ -22,15 +21,15 @@ public class FlightCheckoutPage extends BasePage {
     }
 
     public boolean travellerInfoIsPresent() {
-        return driver.findElement(firstNameField).isDisplayed() && driver.findElement(lastName).isDisplayed()
-                && driver.findElement(phoneField).isDisplayed();
+        return getDriver().findElement(firstNameField).isDisplayed() && getDriver().findElement(lastName).isDisplayed()
+                && getDriver().findElement(phoneField).isDisplayed();
     }
 
     public boolean insuranceIsPresent() {
-        return driver.findElement(insuranceSection).isDisplayed();
+        return getDriver().findElement(insuranceSection).isDisplayed();
     }
 
     public boolean paymentIsPresent() {
-        return driver.findElement(paymentSection).isDisplayed();
+        return getDriver().findElement(paymentSection).isDisplayed();
     }
 }

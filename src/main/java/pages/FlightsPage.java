@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 public class FlightsPage extends BasePage {
     private WebDriver driver;
-    // private WebDriverWait wait;
 
     // Page locators
     private By innerAnnouncement = By.id("uitk-live-announce");
@@ -36,7 +35,6 @@ public class FlightsPage extends BasePage {
 
     public FlightsPage (WebDriver driver) {
         super(driver);
-        this.driver = driver;
     }
 
     public void closeModal() {
@@ -84,7 +82,7 @@ public class FlightsPage extends BasePage {
     }
 
     public void sortByShortest() {
-        WebElement sortDropdown = driver.findElement(sortBySelector);
+        WebElement sortDropdown = getDriver().findElement(sortBySelector);
         Select select = new Select(sortDropdown);
         select.selectByValue("DURATION_INCREASING");
         waitForAnnouncementText(innerAnnouncement, "Results now sorted by Duration (Shortest)");
@@ -100,11 +98,11 @@ public class FlightsPage extends BasePage {
 
     public boolean sortBySelectorIsPresent() {
         waitForElementToDisappear(loadingAnimation);
-        return driver.findElement(sortBySelector).isDisplayed();
+        return getDriver().findElement(sortBySelector).isDisplayed();
     }
 
     public boolean sortByOptionsArePresent() {
-        Select select = new Select(driver.findElement(sortBySelector));
+        Select select = new Select(getDriver().findElement(sortBySelector));
         List<WebElement> allOptions = select.getOptions();
 
         for(WebElement option : allOptions) {
@@ -124,14 +122,14 @@ public class FlightsPage extends BasePage {
 
         for(WebElement flight: flights) {
             flight.click();
-            WebElement closeButton = driver.findElement(By.cssSelector("button[data-icon='tool-close']"));
+            WebElement closeButton = getDriver().findElement(By.cssSelector("button[data-icon='tool-close']"));
             waitForElementToBeClickable(continueBtn);
-            if(!driver.findElement(continueBtn).isDisplayed()) {
+            if(!getDriver().findElement(continueBtn).isDisplayed()) {
                 return false;
             }
             closeButton.click();
             for(int i = 0; i <= 3; i++) {
-                driver.findElement(By.tagName("body")).sendKeys(Keys.DOWN);
+                getDriver().findElement(By.tagName("body")).sendKeys(Keys.DOWN);
             }
         }
         return true;
@@ -139,7 +137,7 @@ public class FlightsPage extends BasePage {
 
     public boolean flightDurationIsPresent() {
         waitForElementToBeVisible(showMoreButton);
-        List<WebElement> flights = driver.findElements(flightCard);
+        List<WebElement> flights = getDriver().findElements(flightCard);
 
         for(WebElement flight:flights) {
             if(!flight.findElement(flightDuration).isDisplayed()) {
