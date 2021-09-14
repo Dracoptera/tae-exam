@@ -1,18 +1,14 @@
-package experimental;
+package reservation;
 
 import base.BaseTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.*;
+import pages.CruiseDetailsPage;
+import pages.CruiseSearchPage;
 
-import static org.testng.Assert.assertTrue;
-
-public class ExperimentalTests extends BaseTests {
-
-    // TODO Rename Tests
-
+public class CruiseTests extends BaseTests {
     @Test
-    public void testDetailsPage()  {
+    public void testCruiseDetails()  {
         homePage.setCruiseDestination();
 
         CruiseSearchPage cruiseSearchPage = homePage.cruiseSearchPage();
@@ -20,6 +16,8 @@ public class ExperimentalTests extends BaseTests {
         cruiseSearchPage.filterOverFifteenNights();
 
         CruiseDetailsPage cruiseDetailsPage = cruiseSearchPage.selectFirstCruise();
+
+        cruiseDetailsPage.waitForPageToLoad();
 
         Assert.assertTrue(cruiseDetailsPage.cruiseNameIsPresent());
         Assert.assertTrue(cruiseDetailsPage.cruiseTitleIsPresent());
