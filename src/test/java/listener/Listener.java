@@ -4,8 +4,6 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import javax.xml.transform.Result;
-
 public class Listener implements ITestListener {
 
     @Override

@@ -5,8 +5,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
 
-import static org.testng.Assert.assertTrue;
-
 public class ExperimentalTests extends BaseTests {
 
     @Test

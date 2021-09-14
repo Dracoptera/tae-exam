@@ -100,7 +100,7 @@ public class BasePage {
             waitForElementToBeVisible(modalLocator);
             clickElement(closeLocator);
         } catch (Exception e) {
-            System.out.printf("The promotion modal is not present.");
+            System.out.print("The promotion modal is not present.");
         }
     }
 }
